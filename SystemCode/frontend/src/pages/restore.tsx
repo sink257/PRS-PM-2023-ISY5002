@@ -90,13 +90,13 @@ const Home: NextPage = () => {
   return (
     <div className="flex max-w-6xl mx-auto flex-col items-center justify-center py-2 min-h-screen">
       <Head>
-        <title>Restore Photos</title>
+        <title>Detect Fake Images</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <Header />
       <main className="flex flex-1 w-full flex-col items-center justify-center text-center px-4 mt-4 sm:mb-0 mb-8">
-        <a
+        {/* <a
           href="https://youtu.be/FRQtFDDrUXQ"
           target="_blank"
           rel="noreferrer"
@@ -104,15 +104,15 @@ const Home: NextPage = () => {
         >
           Are you a developer and want to learn how I built this? Watch the{" "}
           <span className="font-bold">YouTube tutorial</span>.
-        </a>
+        </a> */}
         <h1 className="mx-auto max-w-4xl font-display text-4xl font-bold tracking-normal text-slate-900 sm:text-6xl mb-5">
-          Restore any face photo
+          Detect any photo
         </h1>
         <p className="text-slate-500">
           {" "}
-          {/* Obtained this number from Vercel: based on how many serverless invocations happened. */}
-          <CountUp start={100000} end={325321} duration={2} separator="," />{" "}
-          photos generated and counting.
+          More than{" "}
+          <CountUp start={1} end={100000} duration={2} separator="," />{" "}
+          photos trained in our model.
         </p>
         <ResizablePanel>
           <AnimatePresence exitBeforeEnter>
