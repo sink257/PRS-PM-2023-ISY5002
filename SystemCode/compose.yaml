@@ -1,0 +1,14 @@
+services:
+  frontend:
+    image: nextjs-docker
+    container_name: nextjs
+    hostname: nextjs
+    ports:
+      - "80:80"
+
+  backend:
+    image: python311-docker
+    container_name: python311
+    hostname: python311
+    ports:
+      - "8000:8000"

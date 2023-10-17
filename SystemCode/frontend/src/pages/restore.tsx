@@ -15,7 +15,7 @@ import Toggle from "../components/Toggle";
 import appendNewToName from "../utils/appendNewToName";
 import downloadPhoto from "../utils/downloadPhoto";
 import NSFWPredictor from "../utils/nsfwCheck";
-import va from "@vercel/analytics";
+//import va from "@vercel/analytics";
 
 // Configuration for the uploader
 const uploader = Uploader({
@@ -26,13 +26,14 @@ const uploader = Uploader({
 const options = {
   maxFileCount: 1,
   mimeTypes: ["image/jpeg", "image/png", "image/jpg"],
-  editor: { images: { crop: false } },
+  editor: { images: { crop: false, preview: true } },
   styles: { colors: { primary: "#000" } },
+  multi: false,
   onValidate: async (file: File): Promise<undefined | string> => {
     let isSafe = false;
     try {
       isSafe = await NSFWPredictor.isSafeImg(file);
-      if (!isSafe) va.track("NSFW Image blocked");
+      //if (!isSafe) va.track("NSFW Image blocked");
     } catch (error) {
       console.error("NSFW predictor threw an error", error);
     }
@@ -50,6 +51,16 @@ const Home: NextPage = () => {
   const [sideBySide, setSideBySide] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [photoName, setPhotoName] = useState<string | null>(null);
+  const [prediction, setPrediction] = useState<string | null>(null);
+
+  const fileToBase64 = (file:File):Promise<string> => {
+    return new Promise<string> ((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result ? reader.result.toString() : '');
+      reader.onerror = error => reject(error);
+    })
+  };
 
   const UploadDropZone = () => (
     <UploadDropzone
@@ -57,9 +68,16 @@ const Home: NextPage = () => {
       options={options}
       onUpdate={(file) => {
         if (file.length !== 0) {
-          setPhotoName(file[0].originalFile.originalFileName);
-          setOriginalPhoto(file[0].fileUrl.replace("raw", "thumbnail"));
-          generatePhoto(file[0].fileUrl.replace("raw", "thumbnail"));
+          //setPhotoName(file[0].originalFile.originalFileName);
+          //setOriginalPhoto(file[0].fileUrl.replace("raw", "thumbnail"));
+          //generatePhoto(file[0].fileUrl.replace("raw", "thumbnail"));
+          //console.log(file[0].fileUrl);
+          if (file[0] != null) {
+            setOriginalPhoto(file[0].fileUrl);
+            console.log(file[0].originalFile.originalFileName);
+            console.log(file[0].originalFile.mime);
+            convertBase64(file[0].originalFile.fileUrl);
+          }
         }
       }}
       width="670px"
@@ -67,22 +85,50 @@ const Home: NextPage = () => {
     />
   );
 
-  async function generatePhoto(fileUrl: string) {
+  async function convertBase64(fileUrl: string) {
+    setLoading(true);
+    const res = await fetch(fileUrl, {
+      method: "GET",
+      headers: {
+      },
+    });
+    if (res.status == 200) {
+      let fileData = await res.blob();
+      const reader = new FileReader();
+      reader.readAsDataURL(fileData);
+      reader.onload = () => {
+        let result = reader.result ? reader.result.toString().replace(/^data:(.*,)?/, '') : 'error result';
+        console.log(result);
+        if (result != 'error result') {
+          generatePrediction(result);
+        }
+      };
+      //console.log(reader.result ? reader.result.toString() : 'error result');
+    } else {
+      console.log('error status');
+      setLoading(false);
+    }
+  }
+
+  async function generatePrediction(fileBase64: string) {
     await new Promise((resolve) => setTimeout(resolve, 500));
     setLoading(true);
-    const res = await fetch("/api/generate", {
+    let hostname = window.location.hostname;
+    const res = await fetch("http://" + hostname + ":8000/", {
+      mode: 'cors',
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ imageUrl: fileUrl }),
+      body: JSON.stringify({ bytes_data: fileBase64 }),
+      //body: JSON.stringify({ imageUrl: fileUrl }),
     });
 
     let newPhoto = await res.json();
     if (res.status !== 200) {
       setError(newPhoto);
     } else {
-      setRestoredImage(newPhoto);
+      setPrediction(newPhoto);
     }
     setLoading(false);
   }
@@ -134,9 +180,14 @@ const Home: NextPage = () => {
                   alt="original photo"
                   src={originalPhoto}
                   className="rounded-2xl"
-                  width={475}
-                  height={475}
+                  width={550}
+                  height={550}
                 />
+              )}
+              {prediction && originalPhoto && !restoredImage && (
+                <div>
+                  <h2 className="mb-1 font-medium text-lg">Prediction: {prediction}</h2>
+                </div>
               )}
               {restoredImage && originalPhoto && !sideBySide && (
                 <div className="flex sm:space-x-4 sm:flex-row flex-col">
@@ -189,6 +240,7 @@ const Home: NextPage = () => {
                     onClick={() => {
                       setOriginalPhoto(null);
                       setRestoredImage(null);
+                      setPrediction(null);
                       setRestoredLoaded(false);
                       setError(null);
                     }}

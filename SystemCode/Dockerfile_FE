@@ -1,0 +1,15 @@
+FROM node:alpine
+
+WORKDIR /app
+
+COPY frontend/package.json /app/package.json
+COPY frontend/package-lock.json /app/package-lock.json
+
+#Same as npm install
+RUN npm ci
+
+COPY ./frontend/ /app
+
+RUN npm run build
+
+CMD [ "npm", "start" ]
