@@ -194,7 +194,7 @@ const Home: NextPage = () => {
               )}
               {prediction && originalPhoto && !restoredImage && (
                 <div>
-                  <h2 className="mb-1 font-medium text-lg"><pre>{prediction}</pre></h2>
+                  <h2 className="mb-1 font-medium text-lg whitespace-pre-line">{prediction}</h2>
                 </div>
               )}
               {restoredImage && originalPhoto && !sideBySide && (
