@@ -124,11 +124,19 @@ const Home: NextPage = () => {
       //body: JSON.stringify({ imageUrl: fileUrl }),
     });
 
-    let newPhoto = await res.json();
+    let jsonResult = await res.json();
     if (res.status !== 200) {
-      setError(newPhoto);
+      setError(jsonResult);
     } else {
-      setPrediction(newPhoto);
+      let cnnResult = "AI-Generated";
+      let svmResult = "AI-Generated";
+      if (jsonResult.result_cnn == 1) cnnResult = "Real";
+      else if (jsonResult.result_cnn == 0) jsonResult.proba_cnn = 1.0 - jsonResult.proba_cnn;
+      if (jsonResult.result_svm == 1) svmResult = "Real";
+      let stringResult = "CNN Prediction: Image is " + cnnResult + " with probability score " + (jsonResult.proba_cnn*100).toFixed(2) + "%";
+      stringResult = stringResult.concat("\n");
+      stringResult = stringResult.concat("SVM Prediction: Image is " + svmResult + " with probability score " + (jsonResult.proba_svm*100).toFixed(2) + "%");
+      setPrediction(stringResult);
     }
     setLoading(false);
   }
@@ -136,7 +144,7 @@ const Home: NextPage = () => {
   return (
     <div className="flex max-w-6xl mx-auto flex-col items-center justify-center py-2 min-h-screen">
       <Head>
-        <title>Detect Fake Images</title>
+        <title>AI Image Detector</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -186,7 +194,7 @@ const Home: NextPage = () => {
               )}
               {prediction && originalPhoto && !restoredImage && (
                 <div>
-                  <h2 className="mb-1 font-medium text-lg">Prediction: {prediction}</h2>
+                  <h2 className="mb-1 font-medium text-lg"><pre>{prediction}</pre></h2>
                 </div>
               )}
               {restoredImage && originalPhoto && !sideBySide && (
