@@ -13,7 +13,7 @@ export default function Header() {
           height={36}
         /> */}
         <h1 className="sm:text-5xl text-3xl font-bold ml-2 tracking-tight">
-          Fake Image Detector
+          AI Image Detector
         </h1>
       </Link>
       <a

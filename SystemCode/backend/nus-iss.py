@@ -23,9 +23,11 @@ async def process_request(request: Request):
     data = await request.json()
     bytes_data = data['bytes_data']
     np_img = load_image(bytes_data)
-    result = svm_classifier(np_img)
-    return result
-    
+    proba_svm, result_svm = svm_classifier(np_img)
+    proba_cnn, result_cnn = cnn_classifier(np_img)
+    print({'proba_svm': type(proba_svm), 'result_svm': type(result_svm) , 'proba_cnn': type(proba_cnn), 'result_cnn': type(result_cnn)})
+    return {'proba_svm': proba_svm, 'result_svm': result_svm , 'proba_cnn': proba_cnn, 'result_cnn': result_cnn}
+    # return "done"
 
 if __name__ == "__main__":
    uvicorn.run("nus-iss:app", host="0.0.0.0", port=8000, reload=True)
