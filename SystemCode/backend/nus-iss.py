@@ -22,9 +22,10 @@ async def process_request(request: Request):
     logging.info('Processing a request.')
     data = await request.json()
     bytes_data = data['bytes_data']
-    np_img = load_image(bytes_data)
-    proba_svm, result_svm = svm_classifier(np_img)
-    proba_cnn, result_cnn = cnn_classifier(np_img)
+    np_img_svm = load_image_svm(bytes_data)
+    proba_svm, result_svm = svm_classifier(np_img_svm)
+    np_img_cnn = load_image_cnn(bytes_data)
+    proba_cnn, result_cnn = cnn_classifier(np_img_cnn)
     print({'proba_svm': type(proba_svm), 'result_svm': type(result_svm) , 'proba_cnn': type(proba_cnn), 'result_cnn': type(result_cnn)})
     return {'proba_svm': proba_svm, 'result_svm': result_svm , 'proba_cnn': proba_cnn, 'result_cnn': result_cnn}
     # return "done"
