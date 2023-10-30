@@ -206,7 +206,7 @@ const Home: NextPage = () => {
                   <h2 className="mb-1 font-medium text-lg whitespace-pre-line">{prediction}</h2>
                 </div>
               )}
-              {restoredImage && originalPhoto && !sideBySide && (
+              {/*restoredImage && originalPhoto && !sideBySide && (
                 <div className="flex sm:space-x-4 sm:flex-row flex-col">
                   <div>
                     <h2 className="mb-1 font-medium text-lg">Original Photo</h2>
@@ -232,7 +232,7 @@ const Home: NextPage = () => {
                     </a>
                   </div>
                 </div>
-              )}
+              )*/}
               {loading && (
                 <button
                   disabled
@@ -266,7 +266,7 @@ const Home: NextPage = () => {
                     Upload New Photo
                   </button>
                 )}
-                {restoredLoaded && (
+                {/*restoredLoaded && (
                   <button
                     onClick={() => {
                       downloadPhoto(
@@ -278,7 +278,7 @@ const Home: NextPage = () => {
                   >
                     Download Restored Photo
                   </button>
-                )}
+                )*/}
               </div>
             </motion.div>
           </AnimatePresence>
