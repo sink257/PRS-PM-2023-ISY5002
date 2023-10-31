@@ -19,9 +19,9 @@ app.add_middleware(
 with open('svm_classifier_updated_gridsearch.pkl', 'rb') as f:
     svm_loaded_classifier = pickle.load(f)
 
-CNN_loaded_classifier = tf.keras.models.load_model('my_model_200.keras')
+CNN_loaded_classifier = tf.keras.models.load_model('my_model_200_databal.keras')
 
-resnet_loaded_classifier = tf.keras.models.load_model('my_model_resnet_unfrozen.keras')
+resnet_loaded_classifier = tf.keras.models.load_model('my_model_resnet_databal.keras')
 
 def get_majority_vote(results):
     counts = {}
