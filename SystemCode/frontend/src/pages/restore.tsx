@@ -25,6 +25,7 @@ const uploader = Uploader({
 });
 const options = {
   maxFileCount: 1,
+  maxFileSizeBytes: 5242880,
   mimeTypes: ["image/jpeg", "image/png", "image/jpg"],
   editor: { images: { crop: false, preview: true } },
   styles: { colors: { primary: "#000" } },
