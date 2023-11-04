@@ -16,10 +16,10 @@ app.add_middleware(
     allow_methods=['*'],
     allow_headers=['*'],
 )
-with open('svm_classifier_updated_gridsearch.pkl', 'rb') as f:
-    svm_loaded_classifier = pickle.load(f)
+#with open('svm_classifier_updated_gridsearch.pkl', 'rb') as f:
+#    svm_loaded_classifier = pickle.load(f)
 
-CNN_loaded_classifier = tf.keras.models.load_model('my_model_200_databal.keras')
+#CNN_loaded_classifier = tf.keras.models.load_model('my_model_200_databal_dataaug_20epoch.keras')
 
 resnet_loaded_classifier = tf.keras.models.load_model('my_model_resnet_databal.keras')
 
@@ -39,15 +39,16 @@ async def process_request(request: Request):
     logging.info('Processing a request.')
     data = await request.json()
     bytes_data = data['bytes_data']
-    np_img_svm = load_image_svm(bytes_data)
-    proba_svm, result_svm = svm_classifier(np_img_svm, svm_loaded_classifier)
+    #np_img_svm = load_image_svm(bytes_data)
+    #result_svm = svm_classifier(np_img_svm, svm_loaded_classifier)
     np_img_cnn = load_image_cnn(bytes_data)
-    proba_cnn, result_cnn = cnn_classifier(np_img_cnn, CNN_loaded_classifier)
+    #proba_cnn, result_cnn = cnn_classifier(np_img_cnn, CNN_loaded_classifier)
     proba_resnet, result_resnet = cnn_classifier(np_img_cnn, resnet_loaded_classifier)
-    print({'proba_svm': type(proba_svm), 'result_svm': type(result_svm) , 'proba_cnn': type(proba_cnn), 'result_cnn': type(result_cnn)})
-    majority_vote = get_majority_vote([result_svm, result_cnn, result_resnet])
-    return {'proba_svm': proba_svm, 'result_svm': result_svm , 'proba_cnn': proba_cnn, 'result_cnn': result_cnn, 'proba_resnet': proba_resnet, 'result_resnet': result_resnet, 'final_vote': majority_vote}
+    #print({'result_svm': type(result_svm), 'proba_cnn': type(proba_cnn), 'result_cnn': type(result_cnn), 'proba_resnet': type(proba_resnet), 'result_resnet': type(result_resnet)})
+    #majority_vote = get_majority_vote([result_svm, result_cnn, result_resnet])
+    #return {'result_svm': result_svm , 'proba_cnn': proba_cnn, 'result_cnn': result_cnn, 'proba_resnet': proba_resnet, 'result_resnet': result_resnet, 'final_vote': majority_vote}
+    return {'result_resnet': result_resnet, 'proba_resnet': proba_resnet}
     # return "done"
 
 if __name__ == "__main__":
-   uvicorn.run("nus-iss:app", host="0.0.0.0", port=8000, reload=False)
+    uvicorn.run("nus-iss:app", host="0.0.0.0", port=8000, reload=False)
