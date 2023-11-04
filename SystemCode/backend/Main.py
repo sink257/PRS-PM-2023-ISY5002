@@ -33,9 +33,9 @@ def svm_classifier(np_img, loaded_classifier):
     # with open('svm_classifier_updated_gridsearch.pkl', 'rb') as f:
     #     loaded_classifier = pickle.load(f)
     result = int(loaded_classifier.predict([np_img])[0])
-    proba = float(loaded_classifier.predict_proba([np_img])[0][result])
-    print('svm', result, proba)
-    return proba, result
+    #proba = float(loaded_classifier.predict_proba([np_img])[0][result])
+    print('svm', result)
+    return result
 
 def cnn_classifier(np_img, loaded_classifier):
     np_img = np.expand_dims(np_img, axis=0)

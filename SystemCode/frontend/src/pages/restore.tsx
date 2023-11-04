@@ -129,23 +129,25 @@ const Home: NextPage = () => {
     if (res.status !== 200) {
       setError(jsonResult);
     } else {
-      let cnnResult = "AI-Generated";
-      let svmResult = "AI-Generated";
+      //let cnnResult = "AI-Generated";
+      //let svmResult = "AI-Generated";
       let resnetResult = "AI-Generated";
-      let finalResult = "AI-Generated";
-      if (jsonResult.result_cnn == 1) cnnResult = "Real";
-      else if (jsonResult.result_cnn == 0) jsonResult.proba_cnn = 1.0 - jsonResult.proba_cnn;
-      if (jsonResult.result_svm == 1) svmResult = "Real";
+      //let finalResult = "AI-Generated";
+      //if (jsonResult.result_cnn == 1) cnnResult = "Real";
+      //else if (jsonResult.result_cnn == 0) jsonResult.proba_cnn = 1.0 - jsonResult.proba_cnn;
+      //if (jsonResult.result_svm == 1) svmResult = "Real";
       if (jsonResult.result_resnet == 1) resnetResult = "Real";
       else if (jsonResult.result_resnet == 0) jsonResult.proba_resnet = 1.0 - jsonResult.proba_resnet;
-      if (jsonResult.final_vote == 1) finalResult = "Real";
-      let stringResult = "CNN Prediction: Image is " + cnnResult + " with probability score " + (jsonResult.proba_cnn*100).toFixed(2) + "%";
-      stringResult = stringResult.concat("\n");
-      stringResult = stringResult.concat("ResNet Prediction: Image is " + resnetResult + " with probability score " + (jsonResult.proba_resnet*100).toFixed(2) + "%");
-      stringResult = stringResult.concat("\n");
-      stringResult = stringResult.concat("SVM Prediction: Image is " + svmResult + " with probability score " + (jsonResult.proba_svm*100).toFixed(2) + "%");
-      stringResult = stringResult.concat("\n\n");
-      stringResult = stringResult.concat("Final Prediction: Image is " + finalResult);
+      //if (jsonResult.final_vote == 1) finalResult = "Real";
+      let stringResult = "\n";
+      //let stringResult = "CNN Prediction: Image is " + cnnResult + " with probability score " + (jsonResult.proba_cnn*100).toFixed(2) + "%";
+      //stringResult = stringResult.concat("\n");
+      stringResult = stringResult.concat("Prediction: Image is " + resnetResult + " with probability score " + (jsonResult.proba_resnet*100).toFixed(2) + "%");
+      //stringResult = stringResult.concat("\n");
+      //stringResult = stringResult.concat("SVM Prediction: Image is " + svmResult + " with probability score " + (jsonResult.proba_svm*100).toFixed(2) + "%");
+      //stringResult = stringResult.concat("SVM Prediction: Image is " + svmResult);      
+      //stringResult = stringResult.concat("\n\n");
+      //stringResult = stringResult.concat("Final Prediction: Image is " + finalResult);
       setPrediction(stringResult);
     }
     setLoading(false);

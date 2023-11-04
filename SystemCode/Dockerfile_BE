@@ -6,6 +6,10 @@ COPY backend/requirements.txt /app/requirements.txt
 
 RUN pip install -r requirements.txt
 
-COPY ./backend/ /app
+#COPY ./backend/my_model_200_databal_dataaug_20epoch.keras /app/my_model_200_databal_dataaug_20epoch.keras
+COPY ./backend/my_model_resnet_databal.keras /app/my_model_resnet_databal.keras
+#COPY ./backend/svm_classifier_updated_gridsearch.pkl /app/svm_classifier_updated_gridsearch.pkl
+COPY ./backend/Main.py /app/Main.py
+COPY ./backend/nus-iss.py /app/nus-iss.py
 
 CMD [ "python", "nus-iss.py" ]
