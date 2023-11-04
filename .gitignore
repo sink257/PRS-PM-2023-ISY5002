@@ -2,7 +2,6 @@
 **/my_model_200.keras
 **/my_model_resnet_unfrozen.keras
 **/my_model_200_databal.keras
-**/my_model_resnet_databal.keras
 **/my_model_200_databal_dataaug_20epoch.keras
 **/my_model_resnet_databal_dataaug_20epoch.keras
 **/svm_artifact.pkl
