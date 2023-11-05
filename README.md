@@ -1,7 +1,7 @@
 ---
 
 ## SECTION 1 : PROJECT TITLE
-###ISS Project – AI Image Detection
+## ISS Project – AI Image Detection
 ---
 
 ## SECTION 2 : EXECUTIVE SUMMARY / PAPER ABSTRACT
@@ -26,7 +26,7 @@
 ---
 
 ## SECTION 5 : USER GUIDE
-###Installation Instructions 
+## Installation Instructions 
 
 <ins>System Requirements</ins>
 1) At least 4GB of RAM 
@@ -51,15 +51,15 @@ Note: The frontend website is hosted on port 80 and the backend API is hosted on
 
  
 
-<ins>Troubleshooting</ins>
-Issue: After uploading of image and pressing continue, the prediction result does not show but just stays stuck with a black loading bar. 
-Possible Cause: The backend API is not responding to the request, either due to a crash or some other error. 
+<ins>Troubleshooting</ins>  
+Issue: After uploading of image and pressing continue, the prediction result does not show but just stays stuck with a black loading bar.  
+Possible Cause: The backend API is not responding to the request, either due to a crash or some other error.  
 Resolution: Check that the backend container is still running and not exited, by typing `docker ps`. If needed, restart the container by navigating to SystemCode folder and typing `docker compose up -d`. 
  
 
-Issue: Image upload fails with a message saying the website has exceeded its free Bytescale limit. 
-Possible Cause: Bytescale image upload service has hit the free API usage limit. 
-Resolution: Create a Bytescale account and attach an API key by saving the following line NEXT_PUBLIC_UPLOAD_API_KEY="<API_KEY>" into a file named `.env` and place it into the frontend folder. 
+Issue: Image upload fails with a message saying the website has exceeded its free Bytescale limit.  
+Possible Cause: Bytescale image upload service has hit the free API usage limit.  
+Resolution: Create a Bytescale account and attach an API key by saving the following line NEXT_PUBLIC_UPLOAD_API_KEY="<API_KEY>" into a file named `.env` and place it into the frontend folder.  
 
 ---
 ## SECTION 6 : PROJECT REPORT / PAPER
