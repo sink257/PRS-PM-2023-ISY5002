@@ -16,12 +16,12 @@
 | Wee De Li, Darren | A0269370X | | e1112241@u.nus.edu |
 | Seow Teck Han, Michael | A0270178B | Cloud Architect and Systems Integrator | e1117140@u.nus.edu |
 | Sankalp | A0226756W | | sankalp@u.nus.edu |
-| Kelvin | A0269365N | | e1112236@u.nus.edu |
+| Kelvin | A0269365N | Report Writing, Video Editor | e1112236@u.nus.edu |
 
 ---
 
 ## SECTION 4 : VIDEO OF SYSTEM MODELLING & USE CASE DEMO
-
+[![ISS Project – AI Image Detection](https://img.youtube.com/vi/UKxGmrfKkME/0.jpg)](https://youtu.be/UKxGmrfKkME "PRS-PM-2023-ISY5002 ISS Project – AI Image Detection")
 
 ---
 
