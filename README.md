@@ -20,7 +20,7 @@ The objective of this project is to create an intuitive front-end user interface
 | Wee De Li, Darren | A0269370X | Model Design and Development, Model Integration | e1112241@u.nus.edu |
 | Seow Teck Han, Michael | A0270178B | Cloud Architect and Systems Integrator | e1117140@u.nus.edu |
 | Sankalp | A0226756W | Front End Development, Repository Management | sankalp@u.nus.edu |
-| Kelvin | A0269365N | Report Writing, Video Editor | e1112236@u.nus.edu |
+| Kelvin | A0269365N | Report Template, Video Editor | e1112236@u.nus.edu |
 
 ---
 
