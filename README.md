@@ -46,7 +46,7 @@ The objective of this project is to create an intuitive front-end user interface
 6) `./01_buildBE.sh` to build the backend image and wait until it completes. 
 7) `docker compose up -d` to start both the backend and frontend containers. 
 
-After running the above steps, the website should be able to be viewed by accessing the browser and keying in the following address: http://<IP address>/ 
+After running the above steps, the website should be able to be viewed by accessing the browser and keying in the following address: `http://<IP address>/ `
 
 To stop the containers, navigate to the SystemCode folder and run the command: 
 `docker compose down`
