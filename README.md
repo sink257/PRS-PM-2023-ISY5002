@@ -30,7 +30,10 @@ The objective of this project is to create an intuitive front-end user interface
 ---
 
 ## SECTION 5 : USER GUIDE
-## Installation Instructions 
+<ins>Demo Website</ins>
+Demo website can be viewed at http://54.79.114.148/  
+
+## Local Installation Instructions 
 
 <ins>System Requirements</ins>
 1) At least 4GB of RAM 
