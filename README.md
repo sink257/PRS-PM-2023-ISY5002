@@ -30,7 +30,7 @@ The objective of this project is to create an intuitive front-end user interface
 ---
 
 ## SECTION 5 : USER GUIDE
-<ins>Demo Website</ins>
+<ins>Demo Website</ins>  
 Demo website can be viewed at http://54.79.114.148/  
 
 ## Local Installation Instructions 
@@ -71,6 +71,6 @@ Resolution: Create a Bytescale account and attach an API key by saving the follo
 ---
 ## SECTION 6 : PROJECT REPORT / PAPER
 
-The project report could be found in the ProjectReport folder in this repository. 
+The project report can be found in the ProjectReport folder in this repository. 
 
 
